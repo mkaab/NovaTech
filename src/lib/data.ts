@@ -34,9 +34,9 @@ export const products: Product[] = [
     price: 8000,
     description: "Ultra-compact, clip-on mic for vlogging, live shows, interviews.",
     branding: "Brand Reseller (BOYA)",
-    image: "/images/products/BOYA-MW10.png",
+    image: "/images/products/boya_mw3.png",
     images: [
-      "/images/products/BOYA-MW10.png",
+      "/images/products/boya_mw3.png",
       "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&q=80"
     ]
   },
@@ -48,7 +48,7 @@ export const products: Product[] = [
     price: 11000,
     description: "Dual mics, charging case, AI noise reduction, 2-in-1 adapter.",
     branding: "Brand Reseller (BOYA)",
-    image: "/images/products/boya_mw3.png",
+    image: "/images/products/BOYA-MW10.png",
   },
   {
     id: "p-004",
