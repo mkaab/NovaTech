@@ -30,17 +30,6 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        
-        {/* Hidden Netlify Form for static detection */}
-        <form name="checkout" data-netlify="true" hidden>
-          <input type="text" name="email" />
-          <input type="text" name="firstName" />
-          <input type="text" name="lastName" />
-          <input type="text" name="address" />
-          <input type="text" name="city" />
-          <input type="text" name="phone" />
-          <textarea name="cart_summary"></textarea>
-        </form>
       </body>
     </html>
   );
