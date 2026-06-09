@@ -48,7 +48,7 @@ export const products: Product[] = [
     price: 11000,
     description: "Dual mics, charging case, AI noise reduction, 2-in-1 adapter.",
     branding: "Brand Reseller (BOYA)",
-    image: "/images/products/BOYA-MW10.png",
+    image: "/images/products/boya_mw3.png",
   },
   {
     id: "p-004",
