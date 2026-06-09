@@ -6,11 +6,23 @@ import { useState } from "react"
 import { CartDrawer } from "@/components/ui/CartDrawer"
 import { useCartStore } from "@/lib/store"
 import { motion, AnimatePresence } from "framer-motion"
+import { useRouter } from "next/navigation"
 
 export function Navbar() {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const cartCount = useCartStore((state) => state.cartCount())
+  const router = useRouter()
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const query = formData.get("search")
+    if (query) {
+      setIsMobileMenuOpen(false)
+      router.push(`/collections?search=${encodeURIComponent(query as string)}`)
+    }
+  }
 
   return (
     <>
@@ -35,14 +47,15 @@ export function Navbar() {
 
             {/* Centered Search Bar */}
             <div className="hidden md:flex justify-center w-1/3 px-4">
-              <div className="relative w-full max-w-sm">
+              <form onSubmit={handleSearch} className="relative w-full max-w-sm">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/50" />
                 <input 
                   type="text" 
+                  name="search"
                   placeholder="Search products..." 
                   className="w-full bg-white/5 border border-white/10 rounded-full py-2 pl-10 pr-4 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/30 focus:bg-white/10 transition-all"
                 />
-              </div>
+              </form>
             </div>
 
             {/* Right cluster (Cart & Mobile Menu) */}
@@ -94,14 +107,15 @@ export function Navbar() {
               <Link onClick={() => setIsMobileMenuOpen(false)} href="/collections?category=Power" className="text-white/70 hover:text-white transition">Power</Link>
             </nav>
             <div className="mt-auto pb-12 w-full max-w-sm mx-auto">
-                <div className="relative w-full">
+                <form onSubmit={handleSearch} className="relative w-full">
                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50" />
                   <input 
                     type="text" 
+                    name="search"
                     placeholder="Search products..." 
                     className="w-full bg-white/5 border border-white/10 rounded-full py-4 pl-12 pr-4 text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all text-lg"
                   />
-                </div>
+                </form>
             </div>
           </motion.div>
         )}

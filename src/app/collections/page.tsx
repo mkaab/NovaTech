@@ -16,10 +16,16 @@ function CollectionsContent() {
     CATEGORIES.includes(initialCategory) ? initialCategory : "All"
   )
 
-  // Filter products based on active category
+  // Filter products based on active category and search query
   const filteredProducts = products.filter(product => {
-    if (activeCategory === "All") return true
-    return product.type === activeCategory
+    const searchQuery = searchParams.get("search")?.toLowerCase() || ""
+    const matchesCategory = activeCategory === "All" || product.type === activeCategory
+    const matchesSearch = searchQuery === "" || 
+      product.name.toLowerCase().includes(searchQuery) ||
+      product.category.toLowerCase().includes(searchQuery) ||
+      product.description.toLowerCase().includes(searchQuery)
+      
+    return matchesCategory && matchesSearch
   })
 
   // Ensure active category updates if URL changes
