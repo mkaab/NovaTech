@@ -25,7 +25,7 @@ export default function CheckoutPage() {
     formData.append("cart_summary", `TOTAL: PKR ${cartTotal()}\n\nITEMS:\n${summary}`)
 
     try {
-      await fetch("/", {
+      await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         // @ts-ignore
