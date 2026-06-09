@@ -68,6 +68,13 @@ export default function CheckoutPage() {
                     required
                     className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all"
                   />
+                  <input 
+                    type="tel" 
+                    name="phone"
+                    placeholder="Phone number" 
+                    required
+                    className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all"
+                  />
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" name="marketing" className="accent-white w-4 h-4 rounded border-white/20 bg-transparent" />
                     <span className="text-white/60 text-sm">Email me with news and offers</span>

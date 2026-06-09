@@ -116,5 +116,25 @@ export const products: Product[] = [
     description: "Heavy-duty, high-wattage charging cable.",
     branding: "White-label",
     image: "/images/products/C2c_pixel.png",
+  },
+  {
+    id: "p-011",
+    name: "65W Car Charger",
+    category: "Baseus",
+    type: "Power",
+    price: 1800,
+    description: "65W car charger with PD and PPS fast charging technology.",
+    branding: "White-label",
+    image: "/images/products/BaseusCC.png",
+  },
+  {
+    id: "p-012",
+    name: "44W Flash Charger",
+    category: "Vivo",
+    type: "Power",
+    price: 1800,
+    description: "Flash Charging Charger Set for IOS/Android",
+    branding: "White-label",
+    image: "/images/products/Vivo_adapter.png",
   }
 ]
