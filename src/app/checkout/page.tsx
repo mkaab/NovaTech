@@ -81,9 +81,7 @@ export default function CheckoutPage() {
                 <div className="space-y-4">
                   <div className="relative">
                     <select name="country" className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all appearance-none cursor-pointer">
-                      <option value="US" className="bg-zinc-900">United States</option>
-                      <option value="UK" className="bg-zinc-900">United Kingdom</option>
-                      <option value="CA" className="bg-zinc-900">Canada</option>
+                      <option value="PK" className="bg-zinc-900">Pakistan</option>
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-white/50">
                       <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -101,17 +99,21 @@ export default function CheckoutPage() {
                   <div className="grid grid-cols-3 gap-4">
                     <input type="text" name="city" placeholder="City" required className="col-span-1 w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" />
                     <div className="relative col-span-1">
-                      <select name="state" className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all appearance-none cursor-pointer">
-                        <option value="" className="bg-zinc-900">State</option>
-                        <option value="CA" className="bg-zinc-900">California</option>
-                        <option value="NY" className="bg-zinc-900">New York</option>
-                        <option value="TX" className="bg-zinc-900">Texas</option>
+                      <select name="state" required className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all appearance-none cursor-pointer">
+                        <option value="" className="bg-zinc-900">Province</option>
+                        <option value="Punjab" className="bg-zinc-900">Punjab</option>
+                        <option value="Sindh" className="bg-zinc-900">Sindh</option>
+                        <option value="KPK" className="bg-zinc-900">Khyber Pakhtunkhwa</option>
+                        <option value="Balochistan" className="bg-zinc-900">Balochistan</option>
+                        <option value="Islamabad" className="bg-zinc-900">Islamabad (ICT)</option>
+                        <option value="AJK" className="bg-zinc-900">Azad Kashmir</option>
+                        <option value="GB" className="bg-zinc-900">Gilgit-Baltistan</option>
                       </select>
                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white/50">
                         <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                       </div>
                     </div>
-                    <input type="text" name="zip" placeholder="ZIP code" required className="col-span-1 w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" />
+                    <input type="text" name="zip" placeholder="Postal code" required className="col-span-1 w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" />
                   </div>
                 </div>
               </section>

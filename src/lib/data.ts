@@ -21,9 +21,7 @@ export const products: Product[] = [
     branding: "Generic / Compatible Power",
     image: "/images/products/Adapter-1.png",
     images: [
-      "/images/products/Adapter-1.png",
-      "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=800&q=80",
-      "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=800&q=80"
+      "/images/products/Adapter-1.png"
     ]
   },
   {
@@ -36,8 +34,7 @@ export const products: Product[] = [
     branding: "Brand Reseller (BOYA)",
     image: "/images/products/boya_mw3.png",
     images: [
-      "/images/products/boya_mw3.png",
-      "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&q=80"
+      "/images/products/boya_mw3.png"
     ]
   },
   {
