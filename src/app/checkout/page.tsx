@@ -1,18 +1,44 @@
 "use client"
 
+import { useState } from "react"
 import { useCartStore } from "@/lib/store"
 import Link from "next/link"
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft, Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 export default function CheckoutPage() {
   const { items, cartTotal, clearCart } = useCartStore()
   const router = useRouter()
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    clearCart()
-    router.push('/checkout/success')
+    setIsSubmitting(true)
+
+    const formData = new FormData(e.currentTarget)
+    
+    // Add form name for Netlify detection
+    formData.append("form-name", "checkout")
+    
+    // Format cart into a readable string
+    const summary = items.map(i => `${i.quantity}x ${i.name} (PKR ${i.price})`).join("\n")
+    formData.append("cart_summary", `TOTAL: PKR ${cartTotal()}\n\nITEMS:\n${summary}`)
+
+    try {
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        // @ts-ignore
+        body: new URLSearchParams(formData).toString()
+      })
+      
+      clearCart()
+      router.push('/checkout/success')
+    } catch (error) {
+      console.error(error)
+      alert("There was an issue processing your order. Please try again.")
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -30,19 +56,20 @@ export default function CheckoutPage() {
             <h1 className="text-3xl font-bold mb-8">Checkout</h1>
             
             {/* Delivery Form */}
-            <form className="space-y-8" onSubmit={handleSubmit}>
+            <form name="checkout" data-netlify="true" className="space-y-8" onSubmit={handleSubmit}>
               {/* Contact */}
               <section>
                 <h2 className="text-xl font-medium mb-4">Contact</h2>
                 <div className="space-y-4">
                   <input 
                     type="email" 
+                    name="email"
                     placeholder="Email" 
                     required
                     className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all"
                   />
                   <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" className="accent-white w-4 h-4 rounded border-white/20 bg-transparent" />
+                    <input type="checkbox" name="marketing" className="accent-white w-4 h-4 rounded border-white/20 bg-transparent" />
                     <span className="text-white/60 text-sm">Email me with news and offers</span>
                   </label>
                 </div>
@@ -53,7 +80,7 @@ export default function CheckoutPage() {
                 <h2 className="text-xl font-medium mb-4">Delivery</h2>
                 <div className="space-y-4">
                   <div className="relative">
-                    <select className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all appearance-none cursor-pointer">
+                    <select name="country" className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all appearance-none cursor-pointer">
                       <option value="US" className="bg-zinc-900">United States</option>
                       <option value="UK" className="bg-zinc-900">United Kingdom</option>
                       <option value="CA" className="bg-zinc-900">Canada</option>
@@ -64,17 +91,17 @@ export default function CheckoutPage() {
                   </div>
                   
                   <div className="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="First name" required className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" />
-                    <input type="text" placeholder="Last name" required className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" />
+                    <input type="text" name="firstName" placeholder="First name" required className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" />
+                    <input type="text" name="lastName" placeholder="Last name" required className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" />
                   </div>
                   
-                  <input type="text" placeholder="Address" required className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" />
-                  <input type="text" placeholder="Apartment, suite, etc. (optional)" className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" />
+                  <input type="text" name="address" placeholder="Address" required className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" />
+                  <input type="text" name="apartment" placeholder="Apartment, suite, etc. (optional)" className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" />
                   
                   <div className="grid grid-cols-3 gap-4">
-                    <input type="text" placeholder="City" required className="col-span-1 w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" />
+                    <input type="text" name="city" placeholder="City" required className="col-span-1 w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" />
                     <div className="relative col-span-1">
-                      <select className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all appearance-none cursor-pointer">
+                      <select name="state" className="w-full bg-white/5 border border-white/10 rounded-md p-4 text-white focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all appearance-none cursor-pointer">
                         <option value="" className="bg-zinc-900">State</option>
                         <option value="CA" className="bg-zinc-900">California</option>
                         <option value="NY" className="bg-zinc-900">New York</option>
@@ -84,7 +111,7 @@ export default function CheckoutPage() {
                         <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                       </div>
                     </div>
-                    <input type="text" placeholder="ZIP code" required className="col-span-1 w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" />
+                    <input type="text" name="zip" placeholder="ZIP code" required className="col-span-1 w-full bg-white/5 border border-white/10 rounded-md p-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all" />
                   </div>
                 </div>
               </section>
@@ -93,9 +120,17 @@ export default function CheckoutPage() {
               <div className="pt-6">
                 <button 
                   type="submit"
-                  className="w-full bg-white text-black font-bold text-lg py-5 rounded-md hover:bg-zinc-200 transition-colors shadow-xl shadow-white/5"
+                  disabled={isSubmitting}
+                  className="w-full flex items-center justify-center bg-white text-black font-bold text-lg py-5 rounded-md hover:bg-zinc-200 transition-colors shadow-xl shadow-white/5 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Confirm Order
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-6 h-6 animate-spin mr-2" />
+                      Processing...
+                    </>
+                  ) : (
+                    "Confirm Order"
+                  )}
                 </button>
               </div>
             </form>

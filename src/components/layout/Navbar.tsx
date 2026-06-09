@@ -24,9 +24,9 @@ export function Navbar() {
 
               <nav aria-label="Global" className="hidden lg:block">
                 <ul className="flex items-center gap-6 text-sm font-medium tracking-wide">
-                  <li><Link className="text-white/70 transition hover:text-white" href="/">Audio</Link></li>
-                  <li><Link className="text-white/70 transition hover:text-white" href="/">Wearables</Link></li>
-                  <li><Link className="text-white/70 transition hover:text-white" href="/">Power</Link></li>
+                  <li><Link className="text-white/70 transition hover:text-white" href="/collections?category=Audio">Audio</Link></li>
+                  <li><Link className="text-white/70 transition hover:text-white" href="/collections?category=Wearables">Wearables</Link></li>
+                  <li><Link className="text-white/70 transition hover:text-white" href="/collections?category=Power">Power</Link></li>
                 </ul>
               </nav>
             </div>

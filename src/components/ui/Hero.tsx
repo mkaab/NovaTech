@@ -47,10 +47,10 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-6 relative"
+          className="mb-6 relative w-full"
         >
           <div className="absolute -inset-1 blur-3xl opacity-20 bg-gradient-to-r from-white via-zinc-400 to-zinc-600 rounded-full" />
-          <h1 className="relative text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">
+          <h1 className="relative text-5xl sm:text-6xl md:text-7xl lg:text-[8rem] font-black tracking-[-0.04em] leading-[0.9] text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/40 pb-4">
             Technology for <br />
             <span className="text-white">Everyday Needs.</span>
           </h1>
@@ -60,7 +60,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl font-medium shadow-black drop-shadow-lg"
+          className="text-base sm:text-lg md:text-xl text-white/70 mb-10 max-w-2xl font-light leading-relaxed shadow-black drop-shadow-lg px-4"
         >
           Discover our curated collection of luxury technology designed to elevate your everyday experience. Precision engineering meets minimalist design.
         </motion.p>
